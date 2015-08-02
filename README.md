@@ -4,10 +4,10 @@ server/ contains server-side code, and client/ contains client-side code.
 Use any programming language for writing the server. 
 python-bottle and node-express preferred.
 
-Use git to cut a new branch from here and finish your task. 
-Once your work is done on the new branch, email us the diff between the master 
-and the top of your branch, and your bitbucket user-id so that we can let you 
-push the branch.
+Fork this repository, cut a new branch from the latest commit here, 
+and proceed with this exercise.  Once your work is done on the new branch, 
+send us a pull request, and there we go.
+Refer: https://www.atlassian.com/git/tutorials/making-a-pull-request/example
 
 #EVALUATION
 The final code will be tested by executing ``runserver.sh`` in the 
