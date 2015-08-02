@@ -5,9 +5,9 @@ Use any programming language for writing the server.
 python-bottle and node-express preferred.
 
 Fork this repository, cut a new branch from the latest commit here, 
-and proceed with this exercise.
-Once your work is done on the new branch, send us a pull request, and there
-we go.
+and proceed with this exercise.  Once your work is done on the new branch, 
+send us a pull request, and there we go.
+Refer: https://www.atlassian.com/git/tutorials/making-a-pull-request/example
 
 #EVALUATION
 The final code will be tested by executing ``runserver.sh`` in the 
