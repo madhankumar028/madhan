@@ -15,6 +15,7 @@ server directory, and heading to the browser at the URL
 ``http://localhost:8000/jstest``
 
 You will be evaluated on:
+
 1. Task completion: Completing the task within the parameteres defined. This will involve 
    writing basic HTML, client side JS, basic server-side code, using git, 
    and writing a shell-script.
@@ -22,6 +23,7 @@ You will be evaluated on:
    between server and client
 
 Bonus points and evaluation: (Do this last!)
+
 1. For finishing the more complicated global-counter task.
 2. For a brief report of the throughput of the server for the 
    different endpoints, and trying to max it out. Document the steps you took. 
