@@ -1,0 +1,36 @@
+{
+  "name": "tfc-jstest",
+  "description": "server/ contains server-side code, and client/ contains client-side code.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MaddyMadhan@bitbucket.org/tanmaig/tfc-jstest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/tanmaig/tfc-jstest#readme",
+
+  "dependencies": {
+      "express" : "~4.0.0",
+      "mongoose" : "~3.8.1",
+      "bcrypt-nodejs" : "latest",
+      "morgan": "~1.0.0",
+      "body-parser": "~1.0.0",
+      "cookie-parser": "~1.0.0",
+      "method-override": "~1.0.0",
+      "md5": "latest",
+      "crypto": "latest"
+  },
+
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-jshint": "latest",
+    "jshint-stylish": "^2.2.1",
+    "grunt-express": "latest"
+  }
+}
