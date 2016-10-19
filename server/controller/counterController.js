@@ -8,7 +8,7 @@ exports.generateCounter = function (req, res) {
         if (errors) {
             res.jsonp({
                 status: 'failure',
-                errors: error
+                error: errors
             });
         } else {
             res.jsonp({

@@ -1,5 +1,13 @@
 <div class="container">
-    <select ng-model="selected" ng-options="tasks for task in displayTasks">
-    <input type="text" />
-    <input type="submit" ng-click="jstestCtrl.onSubmit" />
+    <select ng-model="selected" ng-options="task for task in displayTasks">
+    </br><input type="text" ng-model="value" /></br>
+    <input type="submit" ng-click="jstestCtrl.onSubmit(selected, value)" />
+    <p ng-bind="jstestCtrl.error"></p>
+</div>
+<div>
+    <table>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
 </div>
