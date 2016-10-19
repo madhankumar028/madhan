@@ -3,12 +3,12 @@
     'use strict';
 
     angular
-    .module('app', [])
+    .module('app.constant', [])
     .constant('jstest', {
         'tasks': {
-            'hashFunction'          : 'hash',
-            'counterFunction'       : 'counter',
-            'globalCounterFunction' : 'globalCounter'
+            'hash'          : 'hashFunctio',
+            'counter'       : 'counterFunction',
+            'globalCounter' : 'globalCounterFunction'
         }
     });
 }());
