@@ -24,19 +24,19 @@
         function onSubmit(task, value) {
 
             var selectedTask = task,
-                input = value,
-                test;
+                input = value;
 
             if (selectedTask === $scope.displayTasks[0]) {
-                var generatedHash = jstestService.generateHash(input);
-                // self.generatedHash = jstestService.generatedHash.hash;
-                generatedHash.then(function (response) {
-                    test = response.data;
-                });
-                console.log(test);
+                var responseData = jstestService.generateHash(input);
             } else if (selectedTask === $scope.displayTasks[1]){
-                jstestService.generateCounter(input);
-                self.error = jstestService.errorMessage;
+                var isUserInputNumber = isNaN(input);
+                if (isUserInputNumber != false) {
+                    $scope.error = "Numbers are allowed";
+                    return;
+                } else {
+                    jstestService.generateCounter(input);
+                    self.error = jstestService.errorMessage;
+                }
             } else {
                 jstestService.generateGlobalCounter(input);
             }

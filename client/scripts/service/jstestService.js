@@ -13,7 +13,6 @@
         self.generateHash          = generateHash;
         self.generateCounter       = generateCounter;
         // self.generateGlobalCounter = generateGlobalCounter;
-        self.errorMessage = '';
 
         /**
          * generateHash
@@ -35,9 +34,9 @@
 
             $http(options)
             .then(function successCallback(response) {
-                deferred.resolve(response.data);
+                return deferred.resolve(response.data);
             }, function errorCallback(response) {
-                
+
             });
         }
 

@@ -4,11 +4,13 @@ exports.generateCounter = function (reqData, callback) {
 
     var output = 0;
 
-    if ((reqData <= 0) || (typeof reqData === 'string')) {
-        throw new Error('Invalid value');
+    if ((reqData <= 0)) {
+        return;
     }
 
-    output = reqData + 1;
+    var userInput = parseInt(reqData);
+
+    output = userInput + 1;
 
     var counterValue = new counter();
     counterValue.counter.input  = reqData;
