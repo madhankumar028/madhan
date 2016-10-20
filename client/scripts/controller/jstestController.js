@@ -4,7 +4,7 @@
 
     angular
     .module('app.jstest', [])
-    .controller('jstestController', function(jstest, $scope, jstestService) {
+    .controller('jstestController', function(jstest, $scope, jstestService, $exceptionHandler) {
 
         var self = this;
 
@@ -26,20 +26,31 @@
             var selectedTask = task,
                 input = value;
 
+            $scope.error = '';
+
             if (selectedTask === $scope.displayTasks[0]) {
                 var responseData = jstestService.generateHash(input);
             } else if (selectedTask === $scope.displayTasks[1]){
-                var isUserInputNumber = isNaN(input);
-                if (isUserInputNumber != false) {
-                    $scope.error = "Numbers are allowed";
-                    return;
-                } else {
-                    jstestService.generateCounter(input);
-                    self.error = jstestService.errorMessage;
-                }
+                validateUserInput(input);
+                jstestService.generateCounter(input);
             } else {
+                validateUserInput(input);
                 jstestService.generateGlobalCounter(input);
             }
+
+            $scope.value = null;
+        }
+
+        function validateUserInput(input) {
+
+            var isUserInputNumber = isNaN(input);
+
+            try {
+                if (isUserInputNumber != false) {
+                    $scope.error = "Only Numbers Are Allowed";
+                    throw new Exception;
+                }
+            } catch (e) {}
         }
     });
 }());

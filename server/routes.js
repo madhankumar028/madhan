@@ -1,6 +1,6 @@
 var hashController = require('./controller/hashController.js');
 var counterController = require('./controller/counterController.js');
-var globalCounter = require('./controller/globalCounterController.js');
+var globalCounterController = require('./controller/globalCounterController.js');
 
 module.exports = function (app) {
 

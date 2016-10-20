@@ -12,7 +12,8 @@
 
         self.generateHash          = generateHash;
         self.generateCounter       = generateCounter;
-        // self.generateGlobalCounter = generateGlobalCounter;
+        self.generateGlobalCounter = generateGlobalCounter;
+        self.errorMessage = '';
 
         /**
          * generateHash
@@ -34,12 +35,18 @@
 
             $http(options)
             .then(function successCallback(response) {
-                return deferred.resolve(response.data);
+                deferred.resolve(response.data);
             }, function errorCallback(response) {
 
             });
         }
 
+        /**
+         * generateCounter
+         *
+         * @param {String} input
+         * @returns {Promise} Returns a promise
+         */
         function generateCounter(input) {
 
             var options = {
@@ -49,13 +56,41 @@
                     counterValue: input
                 },
                 headers: {'content-type': 'application/json'}
-            };
+            },
+            deferred = $q.defer();
 
             $http(options)
             .then(function successCallback(response) {
-
+                deferred.resolve(response.data);
             }, function errorCallback(response) {
+                deferred.reject('Error while counting the user Input');
                 self.errorMessage = 'Invalid value';
+            });
+        }
+
+        /**
+         * generateGlobalCounter
+         *
+         * @param {String} input
+         * @returns {Promise} Returns a promise
+         */
+        function generateGlobalCounter(input) {
+
+            var options = {
+                url: '/api/global-counter',
+                method: 'POST',
+                data: {
+                    globalCounterValue: input
+                },
+                headers: {'content-type': 'application/json'}
+            },
+            deferred = $q.defer();
+
+            $http(options)
+            .then(function successCallback(response) {
+                deferred.resolve(response.data);
+            }, function errorCallback(response) {
+                deferred.reject('Error while counting the user Input');
             });
         }
     }
