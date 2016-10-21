@@ -9,6 +9,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/hash', function (req, res) {
+        console.log('hash');
         hashController.generateHash(req, res);
     });
 
