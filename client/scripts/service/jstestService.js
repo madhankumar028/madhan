@@ -4,9 +4,9 @@
 
     angular
     .module('app.jstest')
-    .service('jstestService', jstestService);
+    .service('JstestService', JstestService);
 
-    function jstestService($http, $q) {
+    function JstestService($http, $q) {
 
         var self = this;
 
@@ -39,6 +39,8 @@
             }, function errorCallback(response) {
 
             });
+
+            return deferred.promise;
         }
 
         /**
@@ -66,6 +68,8 @@
                 deferred.reject('Error while counting the user Input');
                 self.errorMessage = 'Invalid value';
             });
+
+            return deferred.promise;
         }
 
         /**
@@ -92,6 +96,8 @@
             }, function errorCallback(response) {
                 deferred.reject('Error while counting the user Input');
             });
+
+            return deferred.promise;
         }
     }
 }());

@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="col-sm-6 col-sm-offset-3 pull-left">
+<div class="container pull-left">
+    <div class="col-sm-6 col-sm-offset-3">
         <form name="jstestForm">
             <div class="form-group">
                 <select ng-model="selected" ng-options="task for task in displayTasks"></select>
@@ -12,10 +12,4 @@
         </form>
     </div>
 </div>
-<div>
-    <table>
-        <tr>
-            <td></td>
-        </tr>
-    </table>
-</div>
+<div id="tableData"></div>

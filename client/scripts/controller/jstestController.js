@@ -4,15 +4,16 @@
 
     angular
     .module('app.jstest', [])
-    .controller('jstestController', function(jstest, $scope, jstestService, $exceptionHandler) {
+    .controller('jstestController', function(jstest, $scope, JstestService) {
 
-        var self = this;
+        var self        = this,
+            taskObjects = jstest.tasks,
+            tasks       = Object.keys(taskObjects);
 
-        var taskObjects = jstest.tasks;
-        var tasks = Object.keys(taskObjects);
+        self.onSubmit  = onSubmit;
+        self.tableData = [];
 
-        self.onSubmit = onSubmit;
-
+        $scope.error        = '';
         $scope.displayTasks = [];
 
         tasks.forEach(function (tasks) {
@@ -24,33 +25,64 @@
         function onSubmit(task, value) {
 
             var selectedTask = task,
-                input = value;
+                input        = value,
+                responseData;
 
             $scope.error = '';
 
             if (selectedTask === $scope.displayTasks[0]) {
-                var responseData = jstestService.generateHash(input);
+                responseData = JstestService.generateHash(input);
+
+                responseData.then(function (response) {
+                    self.hashResponse = response.data.hash;
+                    constructTable(self.hashResponse);
+                });
             } else if (selectedTask === $scope.displayTasks[1]){
-                validateUserInput(input);
-                jstestService.generateCounter(input);
+                var isValid = validateUserInput(input);
+
+                if (isValid !== true) {
+                    $scope.value = '';
+                    return;
+                } else {
+                    JstestService.generateCounter(input);
+                }
             } else {
                 validateUserInput(input);
-                jstestService.generateGlobalCounter(input);
+                JstestService.generateGlobalCounter(input);
             }
+            $scope.value = '';
+        }
 
-            $scope.value = null;
+        function constructTable(data) {
+
+            var output = "<table>",
+                arr    = [],
+                i;
+
+            arr.push(data);
+
+            for(i = 0; i < arr.length; i++) {
+                output += "<tr><td>" +
+                arr[i].input  +
+                "</td><td>"   +
+                arr[i].output +
+                "</td><td>";
+            }
+            output += "</table>";
+
+            document.getElementById('tableData').innerHtml = output;
         }
 
         function validateUserInput(input) {
 
             var isUserInputNumber = isNaN(input);
 
-            try {
-                if (isUserInputNumber != false) {
-                    $scope.error = "Only Numbers Are Allowed";
-                    throw new Exception;
-                }
-            } catch (e) {}
+            if (isUserInputNumber != false) {
+                $scope.error = "Only Numbers Are Allowed";
+                return false;
+            } else {
+                return true;
+            }
         }
     });
 }());
