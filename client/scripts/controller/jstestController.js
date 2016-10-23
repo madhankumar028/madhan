@@ -10,8 +10,13 @@
             taskObjects = jstest.tasks,
             tasks       = Object.keys(taskObjects);
 
-        self.onSubmit  = onSubmit;
-        self.tableData = [];
+        self.requestNo     = 0;
+        self.table         = false;
+        self.hash          = false;
+        self.counter       = false;
+        self.globalCounter = false;
+        self.onSubmit      = onSubmit;
+        self.tableData     = [];
 
         $scope.error        = '';
         $scope.displayTasks = [];
@@ -30,54 +35,65 @@
 
             $scope.error = '';
 
+            self.tableData.length = 0;
+            self.requestNo = self.requestNo + 1;
+
             if (selectedTask === $scope.displayTasks[0]) {
                 responseData = JstestService.generateHash(input);
 
                 responseData.then(function (response) {
                     self.hashResponse = response.data.hash;
-                    constructTable(self.hashResponse);
+                    self.tableData.push(self.hashResponse);
+                    self.table         = true;
+                    self.hash          = true;
+                    self.counter       = false;
+                    self.globalCounter = false;
                 });
             } else if (selectedTask === $scope.displayTasks[1]){
-                var isValid = validateUserInput(input);
+                var isCounterInputValid = validateUserInput(input);
 
-                if (isValid !== true) {
+                if (isCounterInputValid !== true) {
                     $scope.value = '';
                     return;
                 } else {
-                    JstestService.generateCounter(input);
+                    responseData = JstestService.generateCounter(input);
+
+                    responseData.then(function (response) {
+                        self.counterResponse = response.data.counter;
+                        self.tableData.push(self.counterResponse);
+                        self.hash          = false;
+                        self.table         = true;
+                        self.counter       = true;
+                        self.globalCounter = false;
+                    });
                 }
             } else {
-                validateUserInput(input);
-                JstestService.generateGlobalCounter(input);
+                var isGlobalInputValid = validateUserInput(input);
+
+                if (isGlobalInputValid !== true) {
+                    $scope.value = '';
+                    return;
+                } else {
+                    responseData = JstestService.generateGlobalCounter(input);
+
+                    responseData.then(function (response) {
+                        self.globalCounterResponse = response.data.globalCounter;
+                        self.tableData.push(self.globalCounterResponse);
+                        self.table         = true;
+                        self.hash          = false;
+                        self.counter       = false;
+                        self.globalCounter = true;
+                    });
+                }
             }
             $scope.value = '';
-        }
-
-        function constructTable(data) {
-
-            var output = "<table>",
-                arr    = [],
-                i;
-
-            arr.push(data);
-
-            for(i = 0; i < arr.length; i++) {
-                output += "<tr><td>" +
-                arr[i].input  +
-                "</td><td>"   +
-                arr[i].output +
-                "</td><td>";
-            }
-            output += "</table>";
-
-            document.getElementById('tableData').innerHtml = output;
         }
 
         function validateUserInput(input) {
 
             var isUserInputNumber = isNaN(input);
 
-            if (isUserInputNumber != false) {
+            if (isUserInputNumber !== false) {
                 $scope.error = "Only Numbers Are Allowed";
                 return false;
             } else {

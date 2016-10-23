@@ -12,4 +12,18 @@
         </form>
     </div>
 </div>
-<div id="tableData"></div>
+<div class="responseData" ng-show="jstestCtrl.table">
+    <table>
+        <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
+        <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
+        <caption ng-show="jstestCtrl.globalCounter">GlobalCounter(#{{jstestCtrl.requestNo}})</caption>
+        <tr>
+            <th>Input</th>
+            <th>Output</th>
+        </tr>
+        <tr ng-repeat="data in jstestCtrl.tableData">
+            <td>{{data.input}}</td>
+            <td>{{data.output}}</td>
+        </tr>
+    </table>
+</div>
