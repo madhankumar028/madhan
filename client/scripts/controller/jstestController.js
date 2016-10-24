@@ -4,7 +4,7 @@
 
     angular
     .module('app.jstest', [])
-    .controller('jstestController', function(jstest, $scope, JstestService) {
+    .controller('jstestController', function(jstest, $scope, JstestService, NgTableParams) {
 
         var self        = this,
             taskObjects = jstest.tasks,
@@ -19,7 +19,7 @@
         self.onSubmit      = onSubmit;
         self.tableData     = [];
 
-        $scope.error        = '';
+        $scope.errorMessage = '';
         $scope.displayTasks = [];
 
         tasks.forEach(function (tasks) {
@@ -33,24 +33,26 @@
             var selectedTask = task,
                 input        = value;
 
-            $scope.error = '';
+            $scope.errorMessage = '';
 
             self.tableData.length = 0;
             self.requestNo        = self.requestNo + 1;
 
             if (selectedTask === $scope.displayTasks[0]) {
-                generateHash(input);
+                generateHash(input, selectedTask);
                 $scope.value = '';
             } else if (selectedTask === $scope.displayTasks[1]){
-                generateCounter(input);
+                generateCounter(input, selectedTask);
                 $scope.value = '';
             } else {
-                generateGlobalCounter(input);
+                generateGlobalCounter(input, selectedTask);
                 $scope.value = '';
             }
         }
 
-        function generateHash(input) {
+        function generateHash(input, selectedTask) {
+
+            var task = selectedTask;
 
             responseData = JstestService.generateHash(input);
 
@@ -62,9 +64,13 @@
                 self.counter       = false;
                 self.globalCounter = false;
             });
+
+            constructNgTable(self.tableData, task);
         }
 
-        function generateCounter(input) {
+        function generateCounter(input, selectedTask) {
+
+            var task = selectedTask;
 
             var isCounterInputValid = validateUserInput(input);
 
@@ -83,10 +89,14 @@
                     self.counter       = true;
                     self.globalCounter = false;
                 });
+
+                constructNgTable(self.tableData, task);
             }
         }
 
-        function generateGlobalCounter(input) {
+        function generateGlobalCounter(input, selectedTask) {
+
+            var task = selectedTask;
 
             var isGlobalInputValid = validateUserInput(input);
 
@@ -104,8 +114,23 @@
                     self.counter       = false;
                     self.globalCounter = true;
                 });
+
+                constructNgTable(self.tableData, task);
             }
-            $scope.value = '';
+        }
+
+        function constructNgTable(data, task) {
+
+            for (var i = 0; i < $scope.displayTasks.length; i++ ) {
+                if ($scope.displayTasks[i] === task) {
+                    self.tableDataParams = new NgTableParams ({
+                        getData: function () {
+                            return self.tableData;
+                        }
+                    });
+                    return;
+                }
+            }
         }
 
         function validateUserInput(input) {
@@ -113,11 +138,11 @@
             var isUserInputValid = isNaN(input);
 
             if (isUserInputValid !== false) {
-                $scope.error = "Only Numbers Are Allowed";
-                self.table         = false;
-                self.hash          = false;
-                self.counter       = false;
-                self.globalCounter = false;
+                $scope.errorMessage = "Only Numbers Are Allowed";
+                self.table          = false;
+                self.hash           = false;
+                self.counter        = false;
+                self.globalCounter  = false;
                 return false;
             } else {
                 return true;

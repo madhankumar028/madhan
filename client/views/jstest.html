@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <form name="jstestForm">
                 <div class="error">
-                    <p ng-bind="error"></p>
+                    <p ng-bind="errorMessage"></p>
                 </div>
                 <div class="form-group">
                     <select ng-model="selected" ng-options="task for task in displayTasks"></select>
@@ -15,7 +15,7 @@
             </form>
         </div>
         <div class="responseData col-sm-4" ng-show="jstestCtrl.table">
-            <table>
+            <!-- <table>
                 <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
                 <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
                 <caption ng-show="jstestCtrl.globalCounter">GlobalCounter(#{{jstestCtrl.requestNo}})</caption>
@@ -24,6 +24,19 @@
                     <th>Output</th>
                 </tr>
                 <tr ng-repeat="data in jstestCtrl.tableData">
+                    <td>{{data.input}}</td>
+                    <td>{{data.output}}</td>
+                </tr>
+            </table> -->
+            <table ng-table="jstestCtrl.tableDataParams">
+                <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
+                <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
+                <caption ng-show="jstestCtrl.globalCounter">GlobalCounter(#{{jstestCtrl.requestNo}})</caption>
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                </tr>
+                <tr ng-repeat="data in jstestCtrl.tableData track by $index">
                     <td>{{data.input}}</td>
                     <td>{{data.output}}</td>
                 </tr>

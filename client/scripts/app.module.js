@@ -6,7 +6,8 @@
             [
                 'ui.router',
                 'app.constant',
-                'app.jstest'
+                'app.jstest',
+                'ngTable'
             ])
     .config(function ($stateProvider,  $urlRouterProvider) {
 
