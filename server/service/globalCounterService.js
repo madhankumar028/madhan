@@ -9,7 +9,7 @@ exports.generateGlobalCounter = function (reqData, callback) {
     globalCounterValue.input  = reqData;
     globalCounterValue.output = lastInput;
 
-    globalCounter.find({}).exec(function (error, data) {
+    globalCounter.globalCounterSchema.find({}, function (error, data) {
 
         for (var i = 0; i < data.length; i++) {
 
