@@ -9,8 +9,14 @@ exports.generateGlobalCounter = function (reqData, callback) {
     globalCounterValue.input  = reqData;
     globalCounterValue.output = lastInput;
 
-    globalCounter.find().sort({_id: -1}).exec(function (error, data) {
-        if (data.length > 0) {
+    globalCounter.find({}).exec(function (error, data) {
+
+        for (var i = 0; i < data.length; i++) {
+
+            var globalCounterValue = {};
+            globalCounterValue.input = data[i].input;
+            globalCounterValue.output = data[i].output;
+            console.log(data);
             lastInput.push(data[0]);
         }
     });

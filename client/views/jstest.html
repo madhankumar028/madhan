@@ -1,29 +1,31 @@
 <div class="container pull-left">
-    <div class="col-sm-6 col-sm-offset-3">
-        <form name="jstestForm">
-            <div class="form-group">
-                <select ng-model="selected" ng-options="task for task in displayTasks"></select>
-            </div>
-            <div class="form-group">
-                <input type="text" ng-model="value" placeholder="Value"/>
-            </div>
-            <input type="submit" ng-click="jstestCtrl.onSubmit(selected, value)" />
-            <p ng-bind="error"></p>
-        </form>
+    <div class="row">
+        <div class="col-sm-6">
+            <form name="jstestForm">
+                <div class="form-group">
+                    <select ng-model="selected" ng-options="task for task in displayTasks"></select>
+                </div>
+                <div class="form-group">
+                    <input type="text" ng-model="value" placeholder="Value" style="width:115px"/>
+                </div>
+                <input type="submit" ng-click="jstestCtrl.onSubmit(selected, value)" />
+                <p ng-bind="error"></p>
+            </form>
+        </div>
+        <div class="responseData col-sm-4" ng-show="jstestCtrl.table">
+            <table>
+                <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
+                <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
+                <caption ng-show="jstestCtrl.globalCounter">GlobalCounter(#{{jstestCtrl.requestNo}})</caption>
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                </tr>
+                <tr ng-repeat="data in jstestCtrl.tableData">
+                    <td>{{data.input}}</td>
+                    <td>{{data.output}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
-<div class="responseData" ng-show="jstestCtrl.table">
-    <table>
-        <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
-        <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
-        <caption ng-show="jstestCtrl.globalCounter">GlobalCounter(#{{jstestCtrl.requestNo}})</caption>
-        <tr>
-            <th>Input</th>
-            <th>Output</th>
-        </tr>
-        <tr ng-repeat="data in jstestCtrl.tableData">
-            <td>{{data.input}}</td>
-            <td>{{data.output}}</td>
-        </tr>
-    </table>
 </div>

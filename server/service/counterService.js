@@ -2,25 +2,36 @@ var counter = require('../models/counter.js');
 
 exports.generateCounter = function (reqData, callback) {
 
-    var output = 0;
+    var counterValue = new counter(),
+        output       = 0;
 
-    if ((reqData <= 0)) {
-        return;
+    if (reqData > 0) {
+        var userInput = parseInt(reqData);
+
+        output = userInput + 1;
+
+        counterValue.counter.input  = reqData;
+        counterValue.counter.output = output;
+
+        counterValue.save(function (errors, data) {
+            if (errors) {
+                callback('Error countering value', null);
+                return;
+            }
+            callback(null, data);
+        });
+    } else {
+        output = "Invalid value!";
+
+        counterValue.counter.input  = reqData;
+        counterValue.counter.output = output;
+
+        counterValue.save(function (errors, data) {
+            if (errors) {
+                callback('Error countering value', null);
+                return;
+            }
+            callback(null, data);
+        });
     }
-
-    var userInput = parseInt(reqData);
-
-    output = userInput + 1;
-
-    var counterValue = new counter();
-    counterValue.counter.input  = reqData;
-    counterValue.counter.output = output;
-
-    counterValue.save(function (errors, data) {
-        if (errors) {
-            callback('Error countering value', null);
-            return;
-        }
-        callback(null, data);
-    });
 };

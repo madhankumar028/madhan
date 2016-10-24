@@ -36,7 +36,7 @@
             $scope.error = '';
 
             self.tableData.length = 0;
-            self.requestNo = self.requestNo + 1;
+            self.requestNo        = self.requestNo + 1;
 
             if (selectedTask === $scope.displayTasks[0]) {
                 responseData = JstestService.generateHash(input);
@@ -91,9 +91,9 @@
 
         function validateUserInput(input) {
 
-            var isUserInputNumber = isNaN(input);
+            var isUserInputValid = isNaN(input);
 
-            if (isUserInputNumber !== false) {
+            if (isUserInputValid !== false) {
                 $scope.error = "Only Numbers Are Allowed";
                 return false;
             } else {
