@@ -3,7 +3,10 @@
   "description": "server/ contains server-side code, and client/ contains client-side code.",
   "version": "1.0.0",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "start": "SET NODE_ENV=dev && node server.js",
+    "test": "mocha"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://MaddyMadhan@bitbucket.org/tanmaig/tfc-jstest.git"
@@ -21,6 +24,8 @@
     "md5": "latest"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
     "config": "^1.21.0",
     "grunt": "~0.4.4",
     "grunt-concurrent": "^2.3.1",
@@ -29,6 +34,8 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-express": "latest",
     "grunt-nodemon": "^0.4.2",
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
+    "mocha": "^2.4.5",
+    "should": "^11.1.1"
   }
 }
