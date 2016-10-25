@@ -15,7 +15,6 @@
         self.table         = false;
         self.hash          = false;
         self.counter       = false;
-        self.globalCounter = false;
         self.onSubmit      = onSubmit;
         self.tableData     = [];
 
@@ -33,6 +32,10 @@
             var selectedTask = task,
                 input        = value;
 
+            if ((value === undefined) || (value === '')) {
+                $scope.errorMessage = 'All the fields should be filled';
+                return;
+            }
             $scope.errorMessage = '';
 
             self.tableData.length = 0;
@@ -41,11 +44,8 @@
             if (selectedTask === $scope.displayTasks[0]) {
                 generateHash(input, selectedTask);
                 $scope.value = '';
-            } else if (selectedTask === $scope.displayTasks[1]){
-                generateCounter(input, selectedTask);
-                $scope.value = '';
             } else {
-                generateGlobalCounter(input, selectedTask);
+                generateCounter(input, selectedTask);
                 $scope.value = '';
             }
         }
@@ -62,7 +62,6 @@
                 self.table         = true;
                 self.hash          = true;
                 self.counter       = false;
-                self.globalCounter = false;
             });
 
             constructNgTable(self.tableData, task);
@@ -87,32 +86,6 @@
                     self.hash          = false;
                     self.table         = true;
                     self.counter       = true;
-                    self.globalCounter = false;
-                });
-
-                constructNgTable(self.tableData, task);
-            }
-        }
-
-        function generateGlobalCounter(input, selectedTask) {
-
-            var task = selectedTask;
-
-            var isGlobalInputValid = validateUserInput(input);
-
-            if (isGlobalInputValid !== true) {
-                $scope.value = '';
-                return;
-            } else {
-                responseData = JstestService.generateGlobalCounter(input);
-
-                responseData.then(function (response) {
-                    self.globalCounterResponse = response.data.globalCounter;
-                    self.tableData.push(self.globalCounterResponse);
-                    self.table         = true;
-                    self.hash          = false;
-                    self.counter       = false;
-                    self.globalCounter = true;
                 });
 
                 constructNgTable(self.tableData, task);
@@ -120,17 +93,11 @@
         }
 
         function constructNgTable(data, task) {
-
-            for (var i = 0; i < $scope.displayTasks.length; i++ ) {
-                if ($scope.displayTasks[i] === task) {
-                    self.tableDataParams = new NgTableParams ({
-                        getData: function () {
-                            return self.tableData;
-                        }
-                    });
-                    return;
+            self.tableDataParams = new NgTableParams ({
+                getData: function () {
+                    return self.tableData;
                 }
-            }
+            });
         }
 
         function validateUserInput(input) {
@@ -142,7 +109,6 @@
                 self.table          = false;
                 self.hash           = false;
                 self.counter        = false;
-                self.globalCounter  = false;
                 return false;
             } else {
                 return true;

@@ -1,5 +1,11 @@
 var counter = require('../models/counter.js');
 
+/**
+ * Creates a new counter
+ *
+ * @param {Object} reqData The counter data
+ * @param {Function} callback The callback function
+ */
 exports.generateCounter = function (reqData, callback) {
 
     var counterValue = new counter(),

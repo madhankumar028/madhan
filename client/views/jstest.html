@@ -1,7 +1,7 @@
 <div class="container pull-left">
     <div class="row">
         <div class="col-sm-6">
-            <form name="jstestForm">
+            <form name="jstestForm" ng-submit="">
                 <div class="error">
                     <p ng-bind="errorMessage"></p>
                 </div>
@@ -11,14 +11,13 @@
                 <div class="form-group">
                     <input type="text" ng-model="value" placeholder="Value" style="width:115px"/>
                 </div>
-                <input type="submit" ng-click="jstestCtrl.onSubmit(selected, value)" />
+                <input type="submit" ng-click="jstestCtrl.onSubmit(selected, value)" ng-disabled="jstestForm.$invalid" />
             </form>
         </div>
         <div class="responseData col-sm-4" ng-show="jstestCtrl.table">
             <table ng-table="jstestCtrl.tableDataParams">
                 <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
                 <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
-                <caption ng-show="jstestCtrl.globalCounter">GlobalCounter(#{{jstestCtrl.requestNo}})</caption>
                 <tr>
                     <th>Input</th>
                     <th>Output</th>

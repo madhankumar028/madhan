@@ -12,11 +12,10 @@
 
         self.generateHash          = generateHash;
         self.generateCounter       = generateCounter;
-        self.generateGlobalCounter = generateGlobalCounter;
         self.errorMessage = '';
 
         /**
-         * generateHash
+         * generate Hash
          *
          * @param {String} input
          * @returns {Promise} Returns a promise
@@ -37,14 +36,14 @@
             .then(function successCallback(response) {
                 deferred.resolve(response.data);
             }, function errorCallback(response) {
-
+                deferred.reject('Error while hashing the user Input');
             });
 
             return deferred.promise;
         }
 
         /**
-         * generateCounter
+         * generate Counter
          *
          * @param {String} input
          * @returns {Promise} Returns a promise
@@ -67,34 +66,6 @@
             }, function errorCallback(response) {
                 deferred.reject('Error while counting the user Input');
                 self.errorMessage = 'Invalid value';
-            });
-
-            return deferred.promise;
-        }
-
-        /**
-         * generateGlobalCounter
-         *
-         * @param {String} input
-         * @returns {Promise} Returns a promise
-         */
-        function generateGlobalCounter(input) {
-
-            var options = {
-                url: '/api/global-counter',
-                method: 'POST',
-                data: {
-                    globalCounterValue: input
-                },
-                headers: {'content-type': 'application/json'}
-            },
-            deferred = $q.defer();
-
-            $http(options)
-            .then(function successCallback(response) {
-                deferred.resolve(response.data);
-            }, function errorCallback(response) {
-                deferred.reject('Error while counting the user Input');
             });
 
             return deferred.promise;

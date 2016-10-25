@@ -3,6 +3,12 @@ var crypto = require('crypto');
 
 var hash = require('../models/hash.js');
 
+/**
+ * Creates a new hash
+ *
+ * @param {Object} reqData The hash data
+ * @param {Function} callback The callback function
+ */
 exports.generateHash = function (reqData, callback) {
 
     var input = reqData;

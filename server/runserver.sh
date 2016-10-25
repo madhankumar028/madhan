@@ -7,7 +7,7 @@ echo "starting Grunt task(jshint) to validate all js files"
 grunt test
 echo "jshint task is completed"
 echo "starting node server"
-awhile=5
-sleep $awhile && open chrome "http://localhost:8080"
+awhile=1
+sleep $awhile && chrome "http://localhost:8080"
 grunt server
 #Eg: node server.js

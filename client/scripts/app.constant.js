@@ -7,8 +7,7 @@
     .constant('jstest', {
         'tasks': {
             'hash'          : 'hashFunctio',
-            'counter'       : 'counterFunction',
-            'globalCounter' : 'globalCounterFunction'
+            'counter'       : 'counterFunction'
         }
     });
 }());
