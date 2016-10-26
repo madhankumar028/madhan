@@ -6,7 +6,7 @@
     .module('app.constant', [])
     .constant('jstest', {
         'tasks': {
-            'hash'          : 'hashFunctio',
+            'hash'          : 'hashFunction',
             'counter'       : 'counterFunction'
         }
     });
