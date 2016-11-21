@@ -4,7 +4,11 @@
 
     angular
     .module('app.jstest', [])
-    .controller('jstestController', function(jstest, $scope, JstestService, NgTableParams) {
+    .controller('JstestController', JstestCtrl);
+
+    JstestCtrl.$inject = ['$scope', 'JstestService', 'NgTableParams', 'jstest'];
+
+    function JstestCtrl($scope, JstestService, NgTableParams, jstest) {
 
         var self        = this,
             taskObjects = jstest.tasks,
@@ -73,7 +77,7 @@
 
             var isCounterInputValid = validateUserInput(input);
 
-            if (isCounterInputValid !== true) {
+            if (!isCounterInputValid) {
                 $scope.value = '';
                 self.requestNo = self.requestNo - 1;
                 return;
@@ -104,7 +108,7 @@
 
             var isUserInputValid = isNaN(input);
 
-            if (isUserInputValid !== false) {
+            if (isUserInputValid) {
                 $scope.errorMessage = "Only Numbers Are Allowed";
                 self.table          = false;
                 self.hash           = false;
@@ -114,5 +118,5 @@
                 return true;
             }
         }
-    });
-}());
+    }
+})();

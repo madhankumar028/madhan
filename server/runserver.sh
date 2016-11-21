@@ -10,4 +10,3 @@ echo "starting node server"
 awhile=1
 sleep $awhile && chrome "http://localhost:8080"
 grunt server
-#Eg: node server.js

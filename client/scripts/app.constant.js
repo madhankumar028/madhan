@@ -10,4 +10,4 @@
             'counter'       : 'counterFunction'
         }
     });
-}());
+})();

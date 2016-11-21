@@ -15,9 +15,9 @@
             name: 'jstest',
             url: '/jstest',
             templateUrl: 'views/jstest.html',
-            controller: 'jstestController as jstestCtrl'
+            controller: 'JstestController as JstestCtrl'
         });
 
          $urlRouterProvider.otherwise("/jstest");
     });
-}());
+})();

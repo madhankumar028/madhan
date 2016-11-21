@@ -10,9 +10,9 @@
 
         var self = this;
 
-        self.generateHash          = generateHash;
-        self.generateCounter       = generateCounter;
-        self.errorMessage = '';
+        self.generateHash     = generateHash;
+        self.generateCounter  = generateCounter;
+        self.errorMessage     = '';
 
         /**
          * generate Hash
@@ -71,4 +71,4 @@
             return deferred.promise;
         }
     }
-}());
+})();

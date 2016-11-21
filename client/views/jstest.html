@@ -11,18 +11,18 @@
                 <div class="form-group">
                     <input type="text" ng-model="value" placeholder="Value" style="width:100px"/>
                 </div>
-                <input type="submit" class="btn-primary" ng-click="jstestCtrl.onSubmit(selected, value)" ng-disabled="jstestForm.$invalid" />
+                <input type="submit" class="btn-primary" ng-click="JstestCtrl.onSubmit(selected, value)" ng-disabled="jstestForm.$invalid" />
             </form>
         </div>
-        <div class="responseData col-sm-4" ng-show="jstestCtrl.table">
-            <table ng-table="jstestCtrl.tableDataParams">
-                <caption ng-show="jstestCtrl.hash">Hash(#{{jstestCtrl.requestNo}})</caption>
-                <caption ng-show="jstestCtrl.counter">Counter(#{{jstestCtrl.requestNo}})</caption>
+        <div class="responseData col-sm-4" ng-if="JstestCtrl.table">
+            <table ng-table="JstestCtrl.tableDataParams">
+                <caption ng-if="JstestCtrl.hash">Hash(#{{JstestCtrl.requestNo}})</caption>
+                <caption ng-if="JstestCtrl.counter">Counter(#{{JstestCtrl.requestNo}})</caption>
                 <tr>
                     <th>Input</th>
                     <th>Output</th>
                 </tr>
-                <tr ng-repeat="data in jstestCtrl.tableData track by $index">
+                <tr ng-repeat="data in JstestCtrl.tableData track by $index">
                     <td>{{data.input}}</td>
                     <td>{{data.output}}</td>
                 </tr>

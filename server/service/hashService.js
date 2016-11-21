@@ -23,7 +23,6 @@ exports.generateHash = function (reqData, callback) {
             callback('Error hashing value', null);
             return;
         }
-        console.log(hashValue._id);
         callback(null, data);
     });
 };
